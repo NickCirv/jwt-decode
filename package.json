@@ -1,0 +1,29 @@
+{
+  "name": "jwt-decode",
+  "version": "1.0.0",
+  "description": "Decode and inspect JWT tokens — claims, expiry, formatting. Never verifies signatures. Zero dependencies.",
+  "type": "module",
+  "bin": {
+    "jwt-decode": "./index.js",
+    "jwtd": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "developer-tools",
+    "cli",
+    "nodejs",
+    "zero-dependencies",
+    "jwt",
+    "json-web-token",
+    "authentication",
+    "debugging",
+    "api-testing"
+  ],
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "README.md"
+  ]
+}
