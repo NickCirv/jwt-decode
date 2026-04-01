@@ -1,3 +1,5 @@
+![Banner](banner.svg)
+
 # jwt-decode
 
 Decode and inspect JWT tokens — header, payload, claims, expiry, formatting.
