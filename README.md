@@ -1,57 +1,67 @@
-<div align="center">
+![jwt-decode — Nicholas Ashkar repository collection](assets/nicholas-ashkar/banner.png)
 
 # jwt-decode
 
-**Inspect JWT tokens in your terminal — claims, expiry, formats. No secrets. Zero dependencies.**
+Inspect the encoded header and payload of a JWT locally.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue?labelColor=0B0A09)](LICENSE)
-[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green?labelColor=0B0A09)](https://nodejs.org)
-[![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen?labelColor=0B0A09)](#)
 
-</div>
-
-## Install
-
-```bash
-npx github:NickCirv/jwt-decode <token>
-```
-
-Or install globally:
-
-```bash
-npm install -g github:NickCirv/jwt-decode
-```
-
-Requires Node.js >= 18.
-
-## Usage
-
-```bash
-# Decode from argument (default tree view)
-jwt-decode eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-# From stdin
-echo "$TOKEN" | jwt-decode
-
-# From file
-jwt-decode --file token.txt
-
-# From clipboard (pbpaste / xclip / xsel)
-jwt-decode --clipboard
-```
-
-| Flag | Description |
-|------|-------------|
-| `--format tree\|table\|json` | Output format (default: tree) |
-| `--json` | Shorthand for `--format json` |
-| `--claim <key>` | Extract a single claim value |
-| `--check-expiry` | Exit 1 if expired, exit 0 if valid |
-| `--no-color` | Disable color output |
-| `--help`, `-h` | Show help |
+<a id="usage"></a>
 
 ## What it does
 
-Decodes the header and payload of any JWT token and prints them in a color-coded tree, table, or JSON format. Timestamps (`iat`, `exp`, `nbf`) are shown as human-readable dates with relative time. The `--check-expiry` flag makes it useful in shell scripts to gate on token validity. Signature is **never verified** — no secret or key is required.
+Reads a token argument, stdin, file or supported clipboard; renders tree/table/JSON and can extract a claim or compare exp with the current time. See the pinned [implementation](https://github.com/NickCirv/jwt-decode/blob/8564b2ad95580ec5c5b644df786d35e92915453a/index.js).
 
----
-<sub>Zero dependencies · Node >=18 · MIT · by <a href="https://github.com/NickCirv">NickCirv</a></sub>
+
+<a id="install"></a>
+
+## Quickstart
+
+Node requirement from the inspected manifest: **`>=20`**. Create a synthetic token.txt fixture for the example. Avoid putting live tokens in shell history or screenshots.
+
+The following example is **source-inspected, not executed**. It uses a pinned checkout; npm package publication is not assumed. Replace project paths or provide the stated input fixtures before running it.
+
+```bash
+git clone https://github.com/NickCirv/jwt-decode.git
+cd jwt-decode
+git checkout 8564b2ad95580ec5c5b644df786d35e92915453a
+npm install --ignore-scripts
+node index.js --file token.txt --json
+```
+
+Dependencies are installed with lifecycle scripts disabled in this recipe. Read the package scripts before enabling any lifecycle step required by your environment.
+
+## Usage and reference
+
+`jwt-decode` | `jwtd` are the executable names declared by the package. [Command reference](docs/REFERENCE.md) covers source-backed options and entry points.
+
+| Control | Behavior in the inspected implementation |
+| --- | --- |
+| `--file PATH` | Read a token from a file |
+| `--clipboard` | Read a supported system clipboard |
+| `--claim KEY` | Extract one payload claim |
+| `--json` | Emit decoded JSON |
+| `--check-expiry` | Compare exp with time without signature verification |
+
+## Limits and operational notes
+
+Decoding does not verify the signature, issuer, audience or authorization. --check-expiry is only a timestamp check; a successful exit is not evidence that a token is valid or trustworthy.
+
+## Development
+
+No runtime checks were executed for this documentation review. The committed smoke test checks entrypoint JavaScript syntax; it does not exercise the command behavior.
+
+| Script | Declared command |
+| --- | --- |
+| `test` | `node --test` |
+
+Work from the pinned source, keep changes focused, and reproduce the affected behavior with a small fixture before proposing a change. Existing contribution and security policies remain authoritative where present.
+
+## Research and status
+
+[Research record](docs/RESEARCH.md) identifies the inspected revision, source evidence, documentation disposition and verification gaps. Static inspection supports the descriptions here; runtime behavior, dependency installation and current hosted services remain unverified.
+
+## License and author
+
+[License](https://github.com/NickCirv/jwt-decode/blob/8564b2ad95580ec5c5b644df786d35e92915453a/LICENSE)
+
+[Nicholas Ashkar](https://nicholashkar.com) · Applied AI, systems and consulting.
